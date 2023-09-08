@@ -1,0 +1,18 @@
+pipeline {
+          agent {
+                label "Pipeline-slave"
+          }
+          stages {
+                stage ( "pull the code from github" ) {
+                        steps {
+                                git branch: 'main', url: 'https://github.com/gouravaas/new_jenkins_pipeline.git'
+                        }
+                }
+                stage ( "package building" ) {
+                        steps {
+                                sh 'mvn clean package'
+                        }
+                }
+          }
+}
+
