@@ -1,5 +1,7 @@
 pipeline {
-          agent any
+          agent {
+			label "Slave1"
+	}
 
           stages {
                 stage ( "pull the code from github" ) {
