@@ -4,7 +4,7 @@ pipeline {
 	}
 
           stages {
-                stage ( "pull the code from github" ) {
+                stage ( "Please pull the code from github" ) {
                         steps {
                                 git branch: 'main', url: 'https://github.com/GirishAgarwal007/Pipeline_practice.git'
                         }
