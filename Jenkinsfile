@@ -1,6 +1,6 @@
 pipeline {
           agent {
-			label "Slave1"
+			label "slave2"
 	}
 
           stages {
@@ -17,8 +17,8 @@ pipeline {
                 }
                 stage ("Building the Docker image" ) {
 			steps {
-				sh 'sudo docker build -t my-java-app:$BUILD_TAG . '
-				SH 'sudo docker tag my-java-app:$BUILD_TAG girishagarwaldevops/my-java-app:$BUILD_TAG '
+				sh 'sudo docker build -t java-app:$BUILD_TAG . '
+				SH 'sudo docker tag java-app:$BUILD_TAG girishagarwaldevops/java-app:$BUILD_TAG '
                         }
                 }
           }
