@@ -21,7 +21,7 @@ pipeline {
 				sh 'sudo docker tag java-app:$BUILD_TAG girishagarwaldevops/java-app:$BUILD_TAG '
                         }
                 }
-		stage ("Pushing Docker Image to Docker Hub"){
+		stage ("Please Push the  Docker Image to Docker Hub"){
 			steps {
 				withCredentials([usernamePassword(credentialsId: 'docker_cred', passwordVariable: 'dockerpass', usernameVariable: 'dockeruser')]) {
                                       	sh 'sudo docker login -u ${dockeruser} -p ${dockerpass}'
