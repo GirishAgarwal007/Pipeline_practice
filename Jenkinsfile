@@ -55,7 +55,7 @@ pipeline {
 				steps {
 					sshagent(['product']) {
 					sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo apt install -y docker.io"
-					sh "ssh -o StrictHostKeyChecking-no ubuntu@35.154.193.74 sudo systemctl enable --now docker"
+					sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo systemctl enable --now docker"
 			    	 	sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo docker run  -dit -p 8080:8080  girishagarwal/java-app:$BUILD_TAG"
 				}
 			}
