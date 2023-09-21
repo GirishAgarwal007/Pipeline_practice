@@ -38,7 +38,7 @@ pipeline {
 				steps {
 					retry(5) {
 						script {
-							sh 'curl --silent http://172.31.46.88:8080/java-web-app/ | grep -i -E "(india|sr)" '
+							sh 'curl --silent http://15.206.168.109:8080/java-web-app/ | grep -i -E "(india|sr)" '
 							}
 						}
 					}				
