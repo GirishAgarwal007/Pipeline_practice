@@ -31,8 +31,6 @@ pipeline {
 	 	 }
 		stage (" Testing the pipeline" ){
 				steps {
-						sh 'sudo docker stop $(docker ps -aq)'
-						sh 'sudo docker rm -f $(docker ps -aq)'
 						sh 'sudo docker run -dit -p 8080:8080 new-java-app:$BUILD_TAG'
 				}
 			}
