@@ -31,7 +31,7 @@ pipeline {
 	 	 }
 		stage (" Testing the pipeline" ){
 				steps {
-						sh 'sudo docker run -dit -p 8080:8080 new-java-app:$BUILD_TAG'
+						sh 'sudo docker run -dit -p 8080:8080 girishagarwaldevops/java-app:$BUILD_TAG'
 				}
 			}
 			stage("testing website") {
@@ -56,7 +56,7 @@ pipeline {
 					sshagent(['product']) {
 					sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo apt install -y docker.io"
 					sh "ssh -o StrictHostKeyChecking-no ubuntu@35.154.193.74 sudo systemctl enable --now docker"
-			    	 	sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo docker run  -d -p 8080:8080  gouravaas/new-java-app:$BUILD_TAG"
+			    	 	sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo docker run  -d -p 8080:8080  girishagarwal/java-app:$BUILD_TAG"
 				}
 			}
 		}
