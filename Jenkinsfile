@@ -29,6 +29,39 @@ pipeline {
 }
                         }
 	 	 }
+		stage (" Testing the pipeline" ){
+				steps {
+						sh 'sudo docker stop $(docker ps -aq)'
+						sh 'sudo docker rm -f $(docker ps -aq)'
+						sh 'sudo docker run -dit -p 8080:8080 new-java-app:$BUILD_TAG'
+				}
+			}
+			stage("testing website") {
+				steps {
+					retry(5) {
+						script {
+							sh 'curl --silent http://172.31.46.88:8080/java-web-app/ | grep -i -E "(india|sr)" '
+							}
+						}
+					}				
+			}
+			stage("Approval status") {
+				steps {
+					script {
+						 Boolean userInput = input(id: 'Proceed1', message: 'Do you want to Promote this build?', parameters: [[$class: 'BooleanParameterDefinition', defaultValue: true, description: '', name: 'Please confirm you agree with this']])
+                				echo 'userInput: ' + userInput
+					}
+				}
+			}
+                	stage("Prod Env") {
+				steps {
+					sshagent(['product']) {
+					sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo apt install -y docker.io"
+					sh "ssh -o StrictHostKeyChecking-no ubuntu@35.154.193.74 sudo systemctl enable --now docker"
+			    	 	sh "ssh -o StrictHostKeyChecking=no ubuntu@35.154.193.74 sudo docker run  -d -p 8080:8080  gouravaas/new-java-app:$BUILD_TAG"
+				}
+			}
+		}
           }
 }
 
